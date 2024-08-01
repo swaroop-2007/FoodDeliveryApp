@@ -7,7 +7,7 @@ const createCurrentUser = async(req:Request, res:Response) => {
 
     try {
         const {auth0Id} = req.body;
-        const existingUser = await User.findOne(auth0Id);
+        const existingUser = await User.findOne({auth0Id});
 
         if(existingUser) {
             return res.status(200).send();
@@ -20,7 +20,7 @@ const createCurrentUser = async(req:Request, res:Response) => {
     }
     catch (err) {
         console.log(err);
-        res.status(500).json({message: "Error creater user"});
+        res.status(500).json({message: "Error creating user"});
     }
 };
 

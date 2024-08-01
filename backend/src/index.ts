@@ -17,6 +17,6 @@ app.use(cors());
 
 app.use("/api/my/user", myUserRoute);
 
-app.listen(8080, () => {
-    console.log("server started on  localhost: 8080");
+app.listen(7000, () => {
+    console.log("server started on  localhost: 7000");
 });
