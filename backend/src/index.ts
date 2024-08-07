@@ -1,5 +1,5 @@
 // Server code 
-import express, {Request, Response} from 'express';
+import express, {NextFunction, Request, Response} from 'express';
 import cors from 'cors';
 import "dotenv/config";
 import mongoose from 'mongoose';
@@ -16,6 +16,23 @@ app.use(cors());
 
 
 app.use("/api/my/user", myUserRoute);
+
+// GPT Changes
+app.use((err: any, req: Request, res: Response, next: NextFunction) => {
+    if (err.name === 'UnauthorizedError') {
+        console.error('JWT verification error:', err);
+        res.status(401).send('Invalid token');
+    } else {
+        next(err);
+    }
+});
+
+
+//End
+
+
+
+
 
 app.listen(7000, () => {
     console.log("server started on  localhost: 7000");
